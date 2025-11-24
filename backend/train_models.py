@@ -5,7 +5,7 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from data_pipeline import get_history
-from model import train_all_models, save_models
+from model import train_all_models, save_models, DEFAULT_MODEL_DIR
 import pandas as pd
 
 def train_and_save(symbol: str = "SPY"):
@@ -27,8 +27,8 @@ def train_and_save(symbol: str = "SPY"):
         print(f"Training models on {len(df)} data points...")
         models = train_all_models(df)
         
-        print("Saving models...")
-        save_models(models)
+        print(f"Saving models to {DEFAULT_MODEL_DIR}...")
+        save_models(models, directory=DEFAULT_MODEL_DIR)
         print("Done!")
         
     except Exception as e:

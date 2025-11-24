@@ -446,7 +446,12 @@ def save_models(models: Dict[str, Any], directory: str = "models"):
     # Optionally save metadata to json here if needed
 
 
-def load_models(directory: str = "models") -> Dict[str, Any]:
+# Define default model directory relative to this file
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DEFAULT_MODEL_DIR = os.path.join(BASE_DIR, 'models')
+
+
+def load_models(directory: str = DEFAULT_MODEL_DIR) -> Dict[str, Any]:
     """
     Load trained models from disk.
     
@@ -457,7 +462,11 @@ def load_models(directory: str = "models") -> Dict[str, Any]:
         Dictionary containing loaded models
     """
     if not os.path.exists(directory):
-        raise FileNotFoundError(f"Model directory '{directory}' not found. Please train models first.")
+        # Fallback: try looking in current directory if absolute path fails
+        if os.path.exists("models"):
+            directory = "models"
+        else:
+            raise FileNotFoundError(f"Model directory '{directory}' not found. Please train models first.")
         
     models = {}
     
