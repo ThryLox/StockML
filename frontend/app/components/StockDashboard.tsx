@@ -40,6 +40,7 @@ export default function StockDashboard() {
             console.error("Error fetching data:", err);
             setError(
                 err.response?.data?.detail ||
+                err.message ||
                 "Failed to fetch stock data. Please check the symbol and try again."
             );
         } finally {
