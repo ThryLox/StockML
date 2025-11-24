@@ -7,7 +7,7 @@ import PriceChart from "./PriceChart";
 import PredictionCard from "./PredictionCard";
 import FundamentalsCard from "./FundamentalsCard";
 
-const API_URL = "http://localhost:8000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 export default function StockDashboard() {
     const [symbol, setSymbol] = useState("");
