@@ -121,9 +121,21 @@ The application uses a **Transfer Learning** approach for stock prediction:
 
 ## ☁️ Deployment
 
-- **Frontend**: Deploy to **Vercel**.
-- **Backend**: Deploy to **Render** or **Railway** (requires Python environment).
-  - *Note*: Ensure the `models/` directory is included in the build or generated during the build process.
+### Backend (Render)
+1. Create a new **Web Service** on Render.
+2. Connect your repository.
+3. Use the following settings:
+   - **Runtime**: Python 3
+   - **Build Command**: `./build.sh`
+   - **Start Command**: `cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT`
+4. Add Environment Variables (if any).
+
+*Note: The `build.sh` script installs dependencies and trains the models so they are available when the server starts.*
+
+### Frontend (Vercel)
+1. Import the project into Vercel.
+2. Set the **Root Directory** to `frontend`.
+3. Deploy!
 
 ## ⚠️ Disclaimer
 
